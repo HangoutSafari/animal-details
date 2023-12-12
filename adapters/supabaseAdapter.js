@@ -10,7 +10,7 @@ const supabase = createClient(
 
 
 
-export async function getAllAnimalData(id) {
+export async function getAllAnimalData() {
   try {
     const response = await fetch(`http://msanimals:3013/animals`);
     const data = await response.json();
@@ -78,3 +78,22 @@ export async function getEventsData(id) {
     throw error;
   }
 }
+
+
+export async function getUsersData(id) {
+  try {
+    const response = await fetch(`http://msusers:3012/users/${id}`);
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.log('Fetch error:', data);
+      throw new Error(`Failed to fetch data: ${response.statusText}`);
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error in getAnimalData:', error.message);
+    throw error;
+  }
+}
+
